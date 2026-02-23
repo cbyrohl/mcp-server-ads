@@ -1,0 +1,30 @@
+{
+  "responseHeader": {
+    "status": 0,
+    "params": {"q": "author:\"Einstein\"", "fl": "bibcode,title,author,year,pub,citation_count,identifier"}
+  },
+  "response": {
+    "numFound": 150,
+    "start": 0,
+    "docs": [
+      {
+        "bibcode": "1905AnP...322..891E",
+        "title": ["On the Electrodynamics of Moving Bodies"],
+        "author": ["Einstein, Albert"],
+        "year": "1905",
+        "pub": "Annalen der Physik",
+        "citation_count": 5000,
+        "identifier": ["arXiv:physics/0503066", "1905AnP...322..891E", "10.1002/andp.19053221004"]
+      },
+      {
+        "bibcode": "1916AnP...354..769E",
+        "title": ["The Foundation of the General Theory of Relativity"],
+        "author": ["Einstein, Albert"],
+        "year": "1916",
+        "pub": "Annalen der Physik",
+        "citation_count": 3000,
+        "identifier": ["1916AnP...354..769E", "10.1002/andp.19163540702"]
+      }
+    ]
+  }
+}

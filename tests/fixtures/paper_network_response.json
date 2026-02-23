@@ -1,0 +1,12 @@
+{
+  "data": {
+    "root": {
+      "name": "Paper Network",
+      "children": [
+        {"name": "Gravitational Waves", "size": 8},
+        {"name": "Black Holes", "size": 5}
+      ]
+    },
+    "summary": ["2 clusters found", "13 papers total"]
+  }
+}

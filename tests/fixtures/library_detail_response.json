@@ -1,0 +1,14 @@
+{
+  "metadata": {
+    "name": "My Reading List",
+    "description": "Papers to read",
+    "num_documents": 3,
+    "public": false,
+    "id": "abc123"
+  },
+  "documents": [
+    "1905AnP...322..891E",
+    "1916AnP...354..769E",
+    "2016PhRvL.116f1102A"
+  ]
+}

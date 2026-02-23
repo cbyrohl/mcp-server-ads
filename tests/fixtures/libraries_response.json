@@ -1,0 +1,22 @@
+{
+  "libraries": [
+    {
+      "id": "abc123",
+      "name": "My Reading List",
+      "description": "Papers to read",
+      "num_documents": 10,
+      "date_created": "2024-01-01T00:00:00",
+      "date_last_modified": "2024-06-15T12:00:00",
+      "public": false
+    },
+    {
+      "id": "def456",
+      "name": "Dark Matter",
+      "description": "Dark matter references",
+      "num_documents": 25,
+      "date_created": "2023-06-01T00:00:00",
+      "date_last_modified": "2024-05-20T09:00:00",
+      "public": true
+    }
+  ]
+}

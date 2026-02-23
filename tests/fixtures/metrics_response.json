@@ -1,0 +1,67 @@
+{
+  "skipped bibcodes": [],
+  "basic stats": {
+    "number of papers": 80,
+    "normalized paper count": 60.2,
+    "total number of reads": 80000,
+    "average number of reads": 1000.0,
+    "median number of reads": 500.0,
+    "recent number of reads": 5000,
+    "total number of downloads": 30000,
+    "average number of downloads": 375.0,
+    "median number of downloads": 200.0,
+    "recent number of downloads": 2000
+  },
+  "basic stats refereed": {
+    "number of papers": 50,
+    "normalized paper count": 45.5,
+    "total number of reads": 50000,
+    "average number of reads": 1000.0,
+    "median number of reads": 500.0,
+    "recent number of reads": 3000,
+    "total number of downloads": 20000,
+    "average number of downloads": 400.0,
+    "median number of downloads": 200.0,
+    "recent number of downloads": 1500
+  },
+  "citation stats": {
+    "total number of citations": 15000,
+    "average number of citations": 187.5,
+    "median number of citations": 50.0,
+    "normalized number of citations": 12000.0,
+    "total number of refereed citations": 12000,
+    "average number of refereed citations": 150.0,
+    "median number of refereed citations": 40.0,
+    "normalized number of refereed citations": 10000.0
+  },
+  "citation stats refereed": {
+    "total number of citations": 12000,
+    "average number of citations": 240.0,
+    "median number of citations": 80.0,
+    "normalized number of citations": 10000.0,
+    "total number of refereed citations": 10000,
+    "average number of refereed citations": 200.0,
+    "median number of refereed citations": 60.0,
+    "normalized number of refereed citations": 8000.0
+  },
+  "indicators": {
+    "h": 35,
+    "g": 50,
+    "i10": 30,
+    "i100": 5,
+    "m": 2.5,
+    "read10": 100.0,
+    "tori": 500.0,
+    "riq": 200
+  },
+  "indicators refereed": {
+    "h": 30,
+    "g": 40,
+    "i10": 25,
+    "i100": 4,
+    "m": 2.1,
+    "read10": 80.0,
+    "tori": 400.0,
+    "riq": 180
+  }
+}

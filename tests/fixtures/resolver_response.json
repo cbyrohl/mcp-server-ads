@@ -1,0 +1,11 @@
+{
+  "links": {
+    "count": 3,
+    "bibcode": "2016PhRvL.116f1102A",
+    "records": [
+      {"title": "arXiv e-print", "type": "esource", "url": "https://arxiv.org/abs/1602.03837"},
+      {"title": "Publisher Article", "type": "esource", "url": "https://doi.org/10.1103/PhysRevLett.116.061102"},
+      {"title": "SIMBAD Objects", "type": "data", "url": "https://simbad.u-strasbg.fr/simbad/sim-id?Ident=GW150914"}
+    ]
+  }
+}

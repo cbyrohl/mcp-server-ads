@@ -1,0 +1,12 @@
+{
+  "data": {
+    "root": {
+      "name": "Author Network",
+      "children": [
+        {"name": "Einstein, A / Podolsky, B / Rosen, N", "size": 5},
+        {"name": "Bohr, N / Heisenberg, W", "size": 3}
+      ]
+    },
+    "summary": ["2 groups found", "5 unique authors"]
+  }
+}
