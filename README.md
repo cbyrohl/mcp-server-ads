@@ -22,11 +22,11 @@ Provides 11 tools, 3 resources, and 3 prompt workflows with token-efficient outp
 ### Installation
 
 ```bash
-# Install with uv (recommended)
-uv tool install mcp-server-ads
+# Install from GitHub with uv (recommended)
+uv tool install git+https://github.com/cbyrohl/mcp-server-ads
 
 # Or with pip
-pip install mcp-server-ads
+pip install git+https://github.com/cbyrohl/mcp-server-ads
 ```
 
 ### Claude Desktop
@@ -36,7 +36,7 @@ pip install mcp-server-ads
   "mcpServers": {
     "ads": {
       "command": "uvx",
-      "args": ["mcp-server-ads"],
+      "args": ["--from", "git+https://github.com/cbyrohl/mcp-server-ads", "mcp-server-ads"],
       "env": {
         "ADS_API_TOKEN": "your-api-token-here"
       }
@@ -48,8 +48,18 @@ pip install mcp-server-ads
 ### Claude Code
 
 ```bash
-claude mcp add mcp-server-ads -e ADS_API_TOKEN=your-api-token-here -- uvx mcp-server-ads
+claude mcp add --scope user mcp-server-ads -e ADS_API_TOKEN=your-api-token-here -- uvx --from git+https://github.com/cbyrohl/mcp-server-ads mcp-server-ads
 ```
+
+Use `--scope project` instead to share the configuration via `.mcp.json` in your repo, or omit `--scope` for local (current project only).
+
+### Codex CLI
+
+```bash
+codex mcp add mcp-server-ads --env ADS_API_TOKEN=your-api-token-here -- uvx --from git+https://github.com/cbyrohl/mcp-server-ads mcp-server-ads
+```
+
+This installs to `~/.codex/config.toml` (user-level, available across all projects). For project-scoped config, add the entry to `.codex/config.toml` in your project root instead.
 
 ### Running from Source
 
