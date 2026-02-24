@@ -5,7 +5,7 @@
 
 A powerful [MCP](https://modelcontextprotocol.io/) server for the [NASA Astrophysics Data System (ADS)](https://ui.adsabs.harvard.edu/) — the primary database for astrophysics literature. Search papers, traverse citation graphs forward and backward, export BibTeX, compute metrics, and manage reading lists, all through natural language. Works with Claude Desktop/Code, Cursor, OpenAI Codex, and any MCP-compatible client.
 
-Provides 11 tools, 3 resources, and 3 prompt workflows with token-efficient output designed for LLM consumption.
+[demo_15fps_crf20.webm](https://github.com/user-attachments/assets/340b904b-521b-45ef-aa18-73d3c2ddb5d6)
 
 ## Quick Start
 
@@ -18,7 +18,7 @@ Provides 11 tools, 3 resources, and 3 prompt workflows with token-efficient outp
 ### Prerequisites
 
 - Python 3.11+
-
+x
 ### Installation
 
 ```bash
