@@ -17,3 +17,6 @@ htmlcov/
 .idea/
 .vscode/
 .claude/
+demos/*.gif
+demos/*.webm
+demos/*.mp4
