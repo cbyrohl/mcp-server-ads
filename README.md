@@ -15,21 +15,21 @@ A powerful [MCP](https://modelcontextprotocol.io/) server for the [NASA Astrophy
 2. Log in and go to [Settings > API Token](https://ui.adsabs.harvard.edu/user/settings/token)
 3. Click **Generate a new key** and copy the token
 
-### Prerequisites
-
-- Python 3.11+
-x
 ### Installation
 
-```bash
-# Install from GitHub with uv (recommended)
-uv tool install git+https://github.com/cbyrohl/mcp-server-ads
+No separate install step needed — the client configurations below use `uvx` to automatically fetch and run the server. Just pick your client and go. Requires Python 3.11+ and [uv](https://docs.astral.sh/uv/getting-started/installation/).
 
-# Or with pip
-pip install git+https://github.com/cbyrohl/mcp-server-ads
+### Claude Code
+
+```bash
+claude mcp add --scope user mcp-server-ads -e ADS_API_TOKEN=your-api-token-here -- uvx --from git+https://github.com/cbyrohl/mcp-server-ads mcp-server-ads
 ```
 
+Use `--scope project` instead to share the configuration via `.mcp.json` in your repo, or omit `--scope` for local (current project only).
+
 ### Claude Desktop
+
+Add to your [Claude Desktop config](https://modelcontextprotocol.io/quickstart/user):
 
 ```json
 {
@@ -45,14 +45,6 @@ pip install git+https://github.com/cbyrohl/mcp-server-ads
 }
 ```
 
-### Claude Code
-
-```bash
-claude mcp add --scope user mcp-server-ads -e ADS_API_TOKEN=your-api-token-here -- uvx --from git+https://github.com/cbyrohl/mcp-server-ads mcp-server-ads
-```
-
-Use `--scope project` instead to share the configuration via `.mcp.json` in your repo, or omit `--scope` for local (current project only).
-
 ### Codex CLI
 
 ```bash
@@ -60,6 +52,18 @@ codex mcp add mcp-server-ads --env ADS_API_TOKEN=your-api-token-here -- uvx --fr
 ```
 
 This installs to `~/.codex/config.toml` (user-level, available across all projects). For project-scoped config, add the entry to `.codex/config.toml` in your project root instead.
+
+### Standalone / Python API
+
+If you want to install the package directly (e.g. as a Python library or to run the server manually):
+
+```bash
+# Install with uv
+uv tool install git+https://github.com/cbyrohl/mcp-server-ads
+
+# Or with pip
+pip install git+https://github.com/cbyrohl/mcp-server-ads
+```
 
 ### Running from Source
 
