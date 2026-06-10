@@ -82,24 +82,17 @@ def format_metrics(data: dict[str, Any]) -> str:
         lines.append("### Basic Statistics")
         lines.append(f"- **Total papers**: {basic.get('number of papers', '?')}")
         lines.append(f"- **Refereed papers**: {basic_ref.get('number of papers', '?')}")
-        lines.append(
-            f"- **Total reads**: {basic.get('total number of reads', '?')}"
-        )
-        lines.append(
-            f"- **Normalized paper count**: {basic.get('normalized paper count', '?')}"
-        )
+        lines.append(f"- **Total reads**: {basic.get('total number of reads', '?')}")
+        lines.append(f"- **Normalized paper count**: {basic.get('normalized paper count', '?')}")
         lines.append("")
 
     citation = data.get("citation stats", {})
     citation_ref = data.get("citation stats refereed", {})
     if citation:
         lines.append("### Citation Statistics")
+        lines.append(f"- **Total citations**: {citation.get('total number of citations', '?')}")
         lines.append(
-            f"- **Total citations**: {citation.get('total number of citations', '?')}"
-        )
-        lines.append(
-            f"- **Refereed citations**: "
-            f"{citation_ref.get('total number of citations', '?')}"
+            f"- **Refereed citations**: {citation_ref.get('total number of citations', '?')}"
         )
         lines.append("")
 

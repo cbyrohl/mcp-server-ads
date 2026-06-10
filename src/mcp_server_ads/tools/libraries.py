@@ -15,6 +15,15 @@ from mcp_server_ads.formatting import (
 )
 from mcp_server_ads.server import mcp
 
+# grouped by action category
+# fmt: off
+DOCUMENT_ACTIONS = Literal[
+    "add", "remove",
+    "union", "intersection", "difference", "copy", "empty",
+    "get_notes", "add_note", "edit_note", "delete_note",
+]
+# fmt: on
+
 
 @mcp.tool(
     annotations={"readOnlyHint": False, "destructiveHint": False},
@@ -98,9 +107,7 @@ async def ads_library(
             payload["description"] = description
         if public is not None:
             payload["public"] = public
-        data = await client.put(
-            f"/v1/biblib/documents/{library_id}", json=payload
-        )
+        data = await client.put(f"/v1/biblib/documents/{library_id}", json=payload)
         return f"Library `{library_id}` updated. {data.get('msg', '')}"
 
     if action == "delete":
@@ -117,11 +124,7 @@ async def ads_library(
 async def ads_library_documents(
     library_id: Annotated[str, Field(description="Library ID")],
     action: Annotated[
-        Literal[
-            "add", "remove",
-            "union", "intersection", "difference", "copy", "empty",
-            "get_notes", "add_note", "edit_note", "delete_note",
-        ],
+        DOCUMENT_ACTIONS,
         Field(
             description="Action: add/remove bibcodes, "
             "set operations (union/intersection/difference/copy/empty), "
@@ -165,10 +168,7 @@ async def ads_library_documents(
             json={"bibcode": bibcodes or [], "action": action},
         )
         count = data.get("number_added", data.get("number_removed", 0))
-        return (
-            f"{action.capitalize()}d {count} document(s) "
-            f"in library `{library_id}`."
-        )
+        return f"{action.capitalize()}d {count} document(s) in library `{library_id}`."
 
     # Set operations
     if action in ("union", "intersection", "difference", "copy", "empty"):

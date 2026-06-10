@@ -27,6 +27,8 @@ async def test_resolve_links_with_type(mock_ctx, mock_httpx):
         return_value=httpx.Response(200, json=fixture)
     )
     result = await ads_resolve_links(
-        bibcode="2016PhRvL.116f1102A", link_type="esource", ctx=mock_ctx,
+        bibcode="2016PhRvL.116f1102A",
+        link_type="esource",
+        ctx=mock_ctx,
     )
     assert "arXiv" in result

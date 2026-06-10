@@ -23,31 +23,37 @@ class TestRateLimitTracker:
         assert not rate_limits.exhausted
 
     def test_update_from_headers(self, rate_limits):
-        headers = httpx.Headers({
-            "x-ratelimit-limit": "5000",
-            "x-ratelimit-remaining": "4999",
-            "x-ratelimit-reset": str(time.time() + 3600),
-        })
+        headers = httpx.Headers(
+            {
+                "x-ratelimit-limit": "5000",
+                "x-ratelimit-remaining": "4999",
+                "x-ratelimit-reset": str(time.time() + 3600),
+            }
+        )
         rate_limits.update(headers)
         assert rate_limits.limit == 5000
         assert rate_limits.remaining == 4999
         assert not rate_limits.exhausted
 
     def test_exhausted(self, rate_limits):
-        headers = httpx.Headers({
-            "x-ratelimit-limit": "5000",
-            "x-ratelimit-remaining": "0",
-            "x-ratelimit-reset": str(time.time() + 3600),
-        })
+        headers = httpx.Headers(
+            {
+                "x-ratelimit-limit": "5000",
+                "x-ratelimit-remaining": "0",
+                "x-ratelimit-reset": str(time.time() + 3600),
+            }
+        )
         rate_limits.update(headers)
         assert rate_limits.exhausted
 
     def test_exhausted_but_reset_passed(self, rate_limits):
-        headers = httpx.Headers({
-            "x-ratelimit-limit": "5000",
-            "x-ratelimit-remaining": "0",
-            "x-ratelimit-reset": str(time.time() - 10),
-        })
+        headers = httpx.Headers(
+            {
+                "x-ratelimit-limit": "5000",
+                "x-ratelimit-remaining": "0",
+                "x-ratelimit-reset": str(time.time() - 10),
+            }
+        )
         rate_limits.update(headers)
         assert not rate_limits.exhausted
 
@@ -55,11 +61,13 @@ class TestRateLimitTracker:
         assert "No rate-limit data" in rate_limits.status_summary()
 
     def test_status_summary_with_data(self, rate_limits):
-        headers = httpx.Headers({
-            "x-ratelimit-limit": "5000",
-            "x-ratelimit-remaining": "4500",
-            "x-ratelimit-reset": "1700000000",
-        })
+        headers = httpx.Headers(
+            {
+                "x-ratelimit-limit": "5000",
+                "x-ratelimit-remaining": "4500",
+                "x-ratelimit-reset": "1700000000",
+            }
+        )
         rate_limits.update(headers)
         summary = rate_limits.status_summary()
         assert "4500/5000" in summary
@@ -100,10 +108,14 @@ class TestADSClient:
     @pytest.mark.asyncio
     async def test_get(self, ads_client, mock_httpx):
         mock_httpx.get("/v1/test").mock(
-            return_value=httpx.Response(200, json={"result": "ok"}, headers={
-                "x-ratelimit-limit": "5000",
-                "x-ratelimit-remaining": "4999",
-            })
+            return_value=httpx.Response(
+                200,
+                json={"result": "ok"},
+                headers={
+                    "x-ratelimit-limit": "5000",
+                    "x-ratelimit-remaining": "4999",
+                },
+            )
         )
         data = await ads_client.get("/v1/test")
         assert data == {"result": "ok"}
@@ -111,9 +123,7 @@ class TestADSClient:
 
     @pytest.mark.asyncio
     async def test_post(self, ads_client, mock_httpx):
-        mock_httpx.post("/v1/test").mock(
-            return_value=httpx.Response(200, json={"posted": True})
-        )
+        mock_httpx.post("/v1/test").mock(return_value=httpx.Response(200, json={"posted": True}))
         data = await ads_client.post("/v1/test", json={"foo": "bar"})
         assert data == {"posted": True}
 
@@ -123,5 +133,6 @@ class TestADSClient:
         ads_client.rate_limits.reset = time.time() + 3600
         ads_client.rate_limits.limit = 5000
         from fastmcp.exceptions import ToolError
+
         with pytest.raises(ToolError):
             await ads_client.get("/v1/test")

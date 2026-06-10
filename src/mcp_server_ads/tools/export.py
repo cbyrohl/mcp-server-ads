@@ -11,6 +11,8 @@ from mcp_server_ads.client import ADSClient
 from mcp_server_ads.formatting import format_export
 from mcp_server_ads.server import mcp
 
+# grouped by format family
+# fmt: off
 EXPORT_FORMATS = Literal[
     "bibtex", "bibtexabs", "ads", "endnote", "medlars", "ris",
     "aastex", "icarus", "mnras", "soph",
@@ -18,6 +20,7 @@ EXPORT_FORMATS = Literal[
     "rss",
     "ieee", "csl", "custom",
 ]
+# fmt: on
 
 
 @mcp.tool(

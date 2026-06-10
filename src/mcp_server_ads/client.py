@@ -101,9 +101,7 @@ class ADSClient:
 
     def _check_rate_limit(self) -> None:
         if self.rate_limits.exhausted:
-            raise ToolError(
-                f"ADS rate limit exhausted. {self.rate_limits.status_summary()}"
-            )
+            raise ToolError(f"ADS rate limit exhausted. {self.rate_limits.status_summary()}")
 
     async def get(self, path: str, **kwargs: Any) -> dict[str, Any]:
         self._check_rate_limit()

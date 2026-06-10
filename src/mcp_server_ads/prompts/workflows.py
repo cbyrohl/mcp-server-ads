@@ -91,9 +91,7 @@ Follow these steps:
 def generate_bibliography(
     source: Annotated[
         str,
-        Field(
-            description="Either a search query or comma-separated bibcodes"
-        ),
+        Field(description="Either a search query or comma-separated bibcodes"),
     ],
     format: Annotated[
         str,

@@ -14,11 +14,10 @@ FIXTURE_TEXT = (Path(__file__).parent / "fixtures" / "reference_response.txt").r
 
 @pytest.mark.asyncio
 async def test_resolve_reference(mock_ctx, mock_httpx):
-    mock_httpx.post("/v1/reference/text").mock(
-        return_value=httpx.Response(200, text=FIXTURE_TEXT)
-    )
+    mock_httpx.post("/v1/reference/text").mock(return_value=httpx.Response(200, text=FIXTURE_TEXT))
     result = await ads_resolve_reference(
-        references=["Einstein 1905 Annalen der Physik 17 891"], ctx=mock_ctx,
+        references=["Einstein 1905 Annalen der Physik 17 891"],
+        ctx=mock_ctx,
     )
     assert "1905AnP" in result
     assert "Einstein" in result
