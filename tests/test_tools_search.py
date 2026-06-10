@@ -34,6 +34,43 @@ async def test_ads_search_custom_fields(mock_ctx, mock_httpx):
 
 
 @pytest.mark.asyncio
+async def test_ads_search_default_sort_is_date(mock_ctx, mock_httpx):
+    fixture = load_fixture("search_response.json")
+    route = mock_httpx.get("/v1/search/query").mock(
+        return_value=httpx.Response(200, json=fixture)
+    )
+    await ads_search(query='author:"Einstein"', ctx=mock_ctx)
+    assert route.calls.last.request.url.params["sort"] == "date desc"
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("operator", ["similar", "useful", "trending"])
+async def test_ads_search_relevance_operator_defaults_to_score(
+    mock_ctx, mock_httpx, operator
+):
+    fixture = load_fixture("search_response.json")
+    route = mock_httpx.get("/v1/search/query").mock(
+        return_value=httpx.Response(200, json=fixture)
+    )
+    await ads_search(query=f"{operator}(bibcode:2016PhRvL.116f1102A)", ctx=mock_ctx)
+    assert route.calls.last.request.url.params["sort"] == "score desc"
+
+
+@pytest.mark.asyncio
+async def test_ads_search_explicit_sort_overrides_operator_default(mock_ctx, mock_httpx):
+    fixture = load_fixture("search_response.json")
+    route = mock_httpx.get("/v1/search/query").mock(
+        return_value=httpx.Response(200, json=fixture)
+    )
+    await ads_search(
+        query="similar(bibcode:2016PhRvL.116f1102A)",
+        sort="citation_count desc",
+        ctx=mock_ctx,
+    )
+    assert route.calls.last.request.url.params["sort"] == "citation_count desc"
+
+
+@pytest.mark.asyncio
 async def test_ads_bigquery(mock_ctx, mock_httpx):
     fixture = load_fixture("search_response.json")
     mock_httpx.post("/v1/search/bigquery").mock(

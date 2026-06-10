@@ -13,6 +13,16 @@ from mcp_server_ads.server import mcp
 
 DEFAULT_FIELDS = "bibcode,title,author,year,pub,citation_count,identifier"
 
+# Operators that expand into weighted OR-queries matching most of the corpus;
+# their results are only meaningful ranked by relevance.
+RELEVANCE_OPERATORS = ("similar(", "useful(", "trending(")
+
+
+def _default_sort(query: str) -> str:
+    if any(op in query.lower() for op in RELEVANCE_OPERATORS):
+        return "score desc"
+    return "date desc"
+
 
 @mcp.tool(
     annotations={"readOnlyHint": True, "destructiveHint": False},
@@ -32,12 +42,13 @@ async def ads_search(
         ),
     ] = DEFAULT_FIELDS,
     sort: Annotated[
-        str,
+        str | None,
         Field(
             description="Sort order (e.g. 'citation_count desc', 'date desc'). "
-            "Default: 'date desc'"
+            "Default: 'date desc', or 'score desc' for queries using "
+            "similar()/useful()/trending()"
         ),
-    ] = "date desc",
+    ] = None,
     rows: Annotated[
         int,
         Field(description="Number of results to return (1-200). Default: 10", ge=1, le=200),
@@ -67,8 +78,14 @@ async def ads_search(
     - reviews(abs:"dark matter") — review articles
     - useful(bibcode:2016PhRvL.116f1102A) — related useful papers
     - similar(bibcode:2016PhRvL.116f1102A) — similar papers
+
+    Note: similar()/useful()/trending() expand into broad weighted queries,
+    so their total hit counts are not meaningful; only the top relevance-ranked
+    results matter.
     """
     client: ADSClient = ctx.lifespan_context["ads_client"]
+    if sort is None:
+        sort = _default_sort(query)
     data = await client.get(
         "/v1/search/query",
         params={
